@@ -15,18 +15,19 @@ import os
 
 class Rust(Linter):
 
+
     """Provides an interface to Rust."""
     
     workdir = os.getcwd()
     while True:
-    	if "Cargo.toml" in os.listdir(workdir):
-    		break
-    	elif workdir == '/':
-    	    workdir = os.getcwd()
+        if "Cargo.toml" in os.listdir(workdir):
+            break
+        elif workdir == '/':
+            workdir = os.getcwd()
             break
         else:
             workdir = os.path.split(workdir)[0]
-    		continue
+            continue
 
     syntax = 'rust'
     cmd = 'rustc --no-trans -L%s -L%s' % (workdir + '/target', workdir + '/target/deps')
