@@ -11,14 +11,23 @@
 """This module exports the Rustc plugin class."""
 
 from SublimeLinter.lint import Linter
-
+import os
 
 class Rust(Linter):
 
     """Provides an interface to Rust."""
+    workdir = os.getcwd()
+    while True:
+    	if "Cargo.toml" in os.listdir(workdir):
+    		break
+    	elif workdir != '/':
+    		workdir = os.path.split(workdir)[0]
+    		continue
+        else:
+            workdir = os.getcwd()
 
     syntax = 'rust'
-    cmd = 'rustc --no-trans'
+    cmd = 'rustc --no-trans -L%s -L%s' % (workdir + '/target', workdir + '/target/deps')
     tempfile_suffix = 'rs'
 
     regex = (
