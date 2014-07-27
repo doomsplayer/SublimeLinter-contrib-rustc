@@ -13,11 +13,11 @@
 from SublimeLinter.lint import Linter
 import os
 
+
 class Rust(Linter):
 
-
     """Provides an interface to Rust."""
-    
+
     workdir = os.getcwd()
     while True:
         if "Cargo.toml" in os.listdir(workdir):
